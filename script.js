@@ -25,14 +25,18 @@ function game() {
     function getComputerChoice() {
         return choice[Math.floor(Math.random() * 3)];
     }
+    
+    playRound(playerSelection, computerSelection);
 
     function playRound(playerSelection, computerSelection) {
         if (playerSelection === computerSelection)
             alert(`Ничья!
         Выбор компьютера: ${computerSelection}
         Выбор пользователя: ${playerSelection}`)
+
         else if (playerSelection !== "Камень" && playerSelection !== "Ножницы" && playerSelection !== "Бумага")
             alert("Неправильное значение")
+
         else if ((playerSelection === "Камень" && computerSelection === "Ножницы") ||
         (playerSelection === "Ножницы" && computerSelection === "Бумага") ||
         (playerSelection === "Бумага" && computerSelection === "Камень")) {
@@ -41,12 +45,12 @@ function game() {
             Выбор компьютера: ${computerSelection} 
             Выбор пользователя: ${playerSelection}`)
         }
+        
         else {
             computerCounter++;
             alert(`Победил компьютер! Счет ${playerCounter} - ${computerCounter} 
             Выбор компьютера: ${computerSelection}
-            Выбор пользователя: ${playerSelection}`)}
+            Выбор пользователя: ${playerSelection}`)
         }
-    
-    console.log(playRound(playerSelection, computerSelection));
+    }   
 }
