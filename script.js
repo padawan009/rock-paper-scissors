@@ -17,40 +17,42 @@ else
 
 
 function game() {
-    let choice = ["Камень", "Ножницы", "Бумага"]
-    const playerChoice = prompt("Введите значение:")
-    const playerSelection = playerChoice[0].toUpperCase() + playerChoice.toLowerCase().slice(1)
-    const computerSelection = getComputerChoice()
+    let playerSelection = prompt("Введите значение (Камень, Ножницы или Бумага):");
+    playerSelection = playerSelection[0].toUpperCase() + playerSelection.toLowerCase().slice(1);
 
-    function getComputerChoice() {
-        return choice[Math.floor(Math.random() * 3)];
+    if (!["Камень", "Ножницы", "Бумага"].includes(playerSelection)) {
+        alert("Неправильное значение. Попробуйте снова.");
+        return;
+    }
+
+    const computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+}
+
+function getComputerChoice() {
+    const choice = ["Камень", "Ножницы", "Бумага"];
+    return choice[Math.floor(Math.random() * 3)];
+}
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection)
+        alert(`Ничья!
+    Выбор компьютера: ${computerSelection}
+    Выбор пользователя: ${playerSelection}`)
+
+    else if ((playerSelection === "Камень" && computerSelection === "Ножницы") ||
+    (playerSelection === "Ножницы" && computerSelection === "Бумага") ||
+    (playerSelection === "Бумага" && computerSelection === "Камень")) {
+        playerCounter++;
+        alert (`Победил пользователь! Счет ${playerCounter} - ${computerCounter} 
+        Выбор компьютера: ${computerSelection} 
+        Выбор пользователя: ${playerSelection}`)
     }
     
-    playRound(playerSelection, computerSelection);
-
-    function playRound(playerSelection, computerSelection) {
-        if (playerSelection === computerSelection)
-            alert(`Ничья!
+    else {
+        computerCounter++;
+        alert(`Победил компьютер! Счет ${playerCounter} - ${computerCounter} 
         Выбор компьютера: ${computerSelection}
         Выбор пользователя: ${playerSelection}`)
-
-        else if (playerSelection !== "Камень" && playerSelection !== "Ножницы" && playerSelection !== "Бумага")
-            alert("Неправильное значение")
-
-        else if ((playerSelection === "Камень" && computerSelection === "Ножницы") ||
-        (playerSelection === "Ножницы" && computerSelection === "Бумага") ||
-        (playerSelection === "Бумага" && computerSelection === "Камень")) {
-            playerCounter++;
-            alert (`Победил пользователь! Счет ${playerCounter} - ${computerCounter} 
-            Выбор компьютера: ${computerSelection} 
-            Выбор пользователя: ${playerSelection}`)
-        }
-        
-        else {
-            computerCounter++;
-            alert(`Победил компьютер! Счет ${playerCounter} - ${computerCounter} 
-            Выбор компьютера: ${computerSelection}
-            Выбор пользователя: ${playerSelection}`)
-        }
-    }   
+    }
 }
