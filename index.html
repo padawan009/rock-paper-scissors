@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="./images/—Pngtree—gesture icon_4490490.png">
+    <title>Rock Scissors Paper</title>
 </head>
-<body>     
+<body>
+    <header>
+        <h1>Rock - Scissors - Paper</h1>
+    </header>
+    <div>
+        <div class="scoreboard">
+            <p class="user-choice">Ваш выбор: </p>
+            <p class="computer-choice">Выбор компьютера: </p>
+            <p>Счет: <span class="user-score">0</span> - <span class="computer-score">0</span></p>
+        </div>
+        <div class="result"></div>
+    </div>
+    <div class="game">
+        <button class="rock game-button" id="rock" ><img src="./images/камень.png" alt=""></button>
+        <button class="scissors game-button" id="scissors" ><img src="./images/ножницы.png" alt=""></button>
+        <button class="paper game-button" id="paper" ><img src="./images/бумага.png" alt=""></button>
+    </div>
+    
+    <button class="restart-button">Сначала</button>
     <script src="./script.js"></script>
 </body>
 </html>
