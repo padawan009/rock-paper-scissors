@@ -86,20 +86,28 @@ btns.forEach(button => button.addEventListener("click", () => {
     console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`);
 }))
 
-function getComputerChoice() {
-    const randomNum = Math.floor(Math.random() * 3) + 1;
+// function getComputerChoice() {
+//     const randomNum = Math.floor(Math.random() * 3) + 1;
 
-    switch (randomNum) {
-        case 1:
-            computer = "ROCK";
-            break;
-        case 2:
-            computer = "PAPER";
-            break;
-        case 3:
-            computer = "SCISSORS";
-            break;
-    }
+//     switch (randomNum) {
+//         case 1:
+//             computer = "ROCK";
+//             break;
+//         case 2:
+//             computer = "PAPER";
+//             break;
+//         case 3:
+//             computer = "SCISSORS";
+//             break;
+//     }
+// } // можно сделать короче
+
+function getComputerChoice() { 
+    const choices = ["ROCK", "PAPER", "SCISSORS"]; 
+    // const randomIndex = Math.floor(Math.random() * choices.length); // более слабый алгоритм случайных чисел
+    const randomIndex = crypto.getRandomValues(new Uint32Array(1))[0] % choices.length; // криптографический подход, больше "случайностей"
+    computer = choices[randomIndex];
+   
 }
 
 let playerScore = 0;
@@ -124,7 +132,6 @@ function update() {
         res.textContent = "Игра окончена! Ничья!"
         gameover()
     }
-
 };
 
 
@@ -152,9 +159,23 @@ function gameover() {
     rock.disabled = true;
     paper.disabled = true;
     scissors.disabled = true;
-    resetButton.addEventListener("click", refreshPage)
+    resetButton.addEventListener("click", resetGame)
 }
 
-function refreshPage() {
-    window.location.reload(true);
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+    player = "";
+    computer = "";
+    res.textContent = "";
+    choiceUser.textContent = "Ваш выбор:";
+    choiceComput.textContent = "Выбор компьютера:";
+    scoreUser.textContent = "0";
+    scoreComput.textContent = "0";
+
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
 }
+
